@@ -1,6 +1,6 @@
 # Mon Petit Uber
 
-Cette copie indépendante repart avec un historique Git neuf. Le dépôt collaboratif d’origine et les accès de ses contributeurs sont conservés.
+Copie indépendante du repo privé
 
 Avant de démarrer, copier `frontend/.env.example` vers `frontend/.env` pour choisir le backend de cette copie, puis copier `backend/.env.example` vers `backend/.env` et configurer de nouvelles valeurs pour la base de données, Brevo, Stripe, Google OAuth et les sessions. L’adresse d’expéditeur doit être configurée et autorisée dans Brevo. Les anciennes clés ne sont pas incluses dans cette copie. Les téléversements de profils et d’avis de l’ancienne application ne sont pas repris; leurs dossiers sont recréés vides.
 
