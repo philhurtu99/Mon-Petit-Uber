@@ -1,0 +1,412 @@
+/* ── Sales Dashboard ─────────────────────────────────────────────────── */
+
+.sales-wrapper {
+    background: linear-gradient(135deg, #0a1d3f 0%, #1b3355 50%, #0d2847 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #ffffff;
+}
+
+.sales-main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+
+.sales-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.sales-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+}
+
+.sales-subtitle {
+    font-size: 14px;
+    color: lightgray;
+    margin: 0;
+}
+
+.sales-header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.sales-btn-export {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(99, 179, 237, 0.12);
+    color: #63b3ed;
+    border: 1px solid rgba(99, 179, 237, 0.4);
+    border-radius: 50px;
+    padding: 0 24px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.sales-btn-export:hover:not(:disabled) {
+    background: rgba(99, 179, 237, 0.22);
+    border-color: #63b3ed;
+}
+
+/* ── Summary Stats ─────────────────────────────────────────────────── */
+
+.sales-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.summary-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition:
+        transform 0.2s,
+        background 0.2s;
+}
+
+.summary-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+}
+
+.summary-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.summary-icon.revenue {
+    background: rgba(141, 198, 64, 0.15);
+    color: #8dc640;
+}
+.summary-icon.orders {
+    background: rgba(99, 179, 237, 0.15);
+    color: #63b3ed;
+}
+.summary-icon.items {
+    background: rgba(246, 201, 14, 0.15);
+    color: #f6c90e;
+}
+.summary-icon.avg {
+    background: rgba(159, 122, 234, 0.15);
+    color: #9f7aea;
+}
+
+.summary-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.summary-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* ── Best Sellers ────────────────────────────────────────────────────── */
+
+.sales-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8dc640;
+}
+
+.best-sellers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.best-seller-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition:
+        transform 0.2s,
+        background 0.2s;
+    position: relative;
+}
+
+.best-seller-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(141, 198, 64, 0.4);
+}
+
+.best-seller-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.best-seller-rank {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 28px;
+    height: 28px;
+    background: #8dc640;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.best-seller-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.best-seller-qty {
+    font-size: 14px;
+    color: #8dc640;
+    font-weight: 700;
+}
+
+.best-seller-revenue {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 4px;
+}
+
+/* ── Table Performance ──────────────────────────────────────────────── */
+
+.sales-col-stock {
+    text-align: center;
+}
+
+.stock-warning {
+    color: #f6c90e;
+    font-weight: 600;
+}
+
+.stock-danger {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+/* ── Table ───────────────────────────────────────────────────────────── */
+
+.sales-table-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.sales-table thead {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sales-table th {
+    text-align: left;
+    padding: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: transparent;
+    border-radius: 0;
+}
+
+.sales-table th:hover,
+.sales-table th.active {
+    color: #8dc640;
+}
+
+.sales-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sales-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.sales-table tr:last-child td {
+    border-bottom: none;
+}
+
+.sales-col-total {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.sales-col-qty {
+    text-align: center;
+}
+
+.sales-col-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+}
+
+.sales-product-link {
+    color: #8dc640;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.sales-product-link:hover {
+    color: #9fd64e;
+    text-decoration: underline;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.star-rating.rating-column {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+}
+
+.rating-count {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    text-transform: lowercase;
+}
+
+.best-seller-card .star-rating.rating-column {
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.sales-empty {
+    padding: 60px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Search Wrapper (like OrdersHistory) ────────────────────────────── */
+
+.sales-search-wrapper {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.sales-search-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 0 14px;
+}
+
+.sales-search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 11px 0;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .sales-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sales-search-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sales-table th:nth-child(3),
+    .sales-table td:nth-child(3),
+    .sales-table th:nth-child(5),
+    .sales-table td:nth-child(5) {
+        display: none;
+    }
+}

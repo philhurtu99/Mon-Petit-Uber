@@ -1,0 +1,50 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  //
+  "compilerOptions": {
+    "noImplicitAny": false,
+    // File Layout
+    "rootDir": ".",
+    // "outDir": "./dist",
+
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "module": "CommonJS",
+    "target": "ES2020", // Utilise les fonctionnalités modernes de JavaScript
+    "moduleResolution": "node", // Résout les modules comme Node.js le ferait
+    "ignoreDeprecations": "6.0",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true, //permet utiliser import express from "express"
+    // For nodejs:
+    // "lib": ["esnext"],
+    "types": ["node", "jest", "express-session"],
+    // and npm install -D @types/node
+
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Style Options
+    // "noImplicitReturns": true,
+    // "noImplicitOverride": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "noPropertyAccessFromIndexSignature": true,
+
+    // Recommended Options
+    "strict": true, // Activation des vérifications strictes de type
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": false, // Permet d'utiliser import/export avec CommonJS sans erreur de syntaxe ESM
+    "isolatedModules": true, // Nécessaire pour que ts-node et Vite puissent compiler chaque fichier indépendamment
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true, // Ignore les vérifications de types dans les librairies externes (@types)
+  },
+  "include": ["src", "index.ts", "prisma"],
+  "exclude": ["src/tests", "**/*.test.ts"],
+}

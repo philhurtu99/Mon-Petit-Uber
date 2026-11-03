@@ -1,0 +1,65 @@
+.review-subtitle {
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  color: #9ca3af;
+  margin: -14px 0 20px 0;
+}
+
+.review-hint {
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+  margin: 0 0 12px 0;
+}
+
+.stars-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.star {
+  font-size: 36px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.2);
+  transition: transform 0.15s, color 0.15s;
+  line-height: 1;
+}
+
+.star[data-active="true"] {
+  color: #f5a623;
+  transform: scale(1.15);
+}
+
+.review-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  padding: 14px 16px;
+  resize: none;
+  outline: none;  
+  transition: border-color 0.2s;
+}
+
+.review-textarea:focus {
+  border-color: rgba(136, 192, 87, 0.5);
+}
+
+.review-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.review-error {
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  color: #ff4d4d;
+  text-align: center;
+  margin: -12px 0 16px 0;
+}

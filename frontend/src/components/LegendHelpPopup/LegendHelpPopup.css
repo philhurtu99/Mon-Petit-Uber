@@ -1,0 +1,147 @@
+/* Bouton d'aide fixe avec mascotte */
+.helpPopupToggle {
+  background: linear-gradient(135deg, #8dc640 0%, #7ab02f 100%);
+  color: white;
+  border: none;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 1000;
+}
+
+.helpPopupToggle img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  margin-right: 8px;
+  filter: drop-shadow(0 0 15px rgba(10, 29, 63, 0.8)) drop-shadow(0 0 8px rgba(27, 51, 85, 0.6));
+  transition: all 0.3s ease;
+}
+
+.helpPopupToggleText {
+  position: absolute;
+  top: 15px;
+  right: 12px;
+  color: #0a1d3f;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.helpPopupToggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(141, 198, 64, 0.4);
+}
+
+.helpPopupToggle:active {
+  transform: scale(0.95);
+}
+
+/* Panneau latéral d'aide */
+.helpPopupPanel {
+  position: fixed;
+  left: -300px;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a1d3f 0%, #1b3355 50%, #0d2847 100%);
+  padding: 180px 20px 40px 20px;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 999;
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+  border-right: 1px solid rgba(141, 198, 64, 0.2);
+}
+
+.helpPopupPanel.show {
+  left: 0;
+}
+
+.helpPopupPanel.show::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 300px;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 998;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.helpPopupPanel .helpPopupContent {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.helpPopupPanel .helpPopupContent h4 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #8dc640;
+  padding-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.helpPopupPanel .helpPopupItem {
+  border-bottom: 1px solid rgba(141, 198, 64, 0.2);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+}
+
+.helpPopupPanel .helpPopupItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.helpPopupPanel .helpPopupItem p {
+  margin: 0 0 4px 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.helpPopupPanel .helpPopupItem strong {
+  color: #8dc640;
+  font-weight: 600;
+}
+
+.helpPopupPanel .helpPopupText {
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+/* Scrollbar personnalisée */
+.helpPopupPanel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.helpPopupPanel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.helpPopupPanel::-webkit-scrollbar-thumb {
+  background: #8dc640;
+  border-radius: 10px;
+}
+
+.helpPopupPanel::-webkit-scrollbar-thumb:hover {
+  background: #7ab02f;
+}

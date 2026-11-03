@@ -1,0 +1,456 @@
+.botContainer {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999; /* Stay behind most modals (1000+) and footer (1000) */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        sans-serif;
+}
+
+@media (max-width: 768px) {
+    .botContainer {
+        bottom: 20px;
+        right: 12px;
+    }
+}
+
+.chatWindow {
+    width: 340px;
+    height: 500px; /* Hauteur fixe pour ressembler à un vrai chat */
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+@media (max-width: 400px) {
+    .chatWindow {
+        width: calc(100vw - 48px);
+        height: 450px;
+    }
+}
+
+/* --- Header --- */
+.chatHeader {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.headerInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.botAvatar {
+    font-size: 12px;
+    /*background-color: rgba(255, 255, 255, 0.2);*/
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botName {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.botStatus {
+    font-size: 11px;
+    color: #bfdbfe;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.closeButton:hover {
+    opacity: 0.7;
+}
+
+/* --- Zone des messages --- */
+.messagesArea {
+    flex: 1; /* Prend tout l'espace disponible */
+    padding: 16px;
+    background-color: #f3f4f6; /* Gris très clair */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.messageWrapper {
+    display: flex;
+    width: 100%;
+}
+
+.wrapperUser {
+    justify-content: flex-end; /* Aligné à droite */
+}
+
+.wrapperBot {
+    justify-content: flex-start; /* Aligné à gauche */
+}
+
+.messageBubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-line;
+    word-wrap: break-word;
+}
+
+.bubbleUser {
+    background-color: #2563eb; /* Bleu */
+    color: white;
+    border-radius: 16px 16px 4px 16px; /* Queue de bulle en bas à droite */
+}
+
+.bubbleBot {
+    background-color: #ffffff; /* Blanc */
+    color: #1f2937;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px 16px 16px 4px; /* Queue de bulle en bas à gauche */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Input Area --- */
+.inputArea {
+    display: flex;
+    padding: 12px;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    gap: 8px;
+}
+
+.chatInput {
+    flex: 1;
+    border: 1px solid #d1d5db;
+    padding: 10px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.chatInput:focus {
+    border-color: #2563eb;
+}
+
+.chatInput:disabled {
+    background-color: #f3f4f6;
+    cursor: not-allowed;
+}
+
+.sendButton {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        transform 0.1s;
+}
+
+.sendButton:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+.sendButton:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.sendButton:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* --- Animation "Typing" (Les 3 petits points) --- */
+.typingIndicator {
+    display: flex;
+    gap: 2px;
+    padding: 12px 16px;
+    font-weight: bold;
+    color: #6b7280;
+}
+
+.typingIndicator span {
+    animation: blink 1.4s infinite both;
+}
+
+.typingIndicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typingIndicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0.2;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.2;
+    }
+}
+
+/* --- Bouton Flottant (Principal) --- */
+.floatingButton {
+    width: 60px;
+    height: 60px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@media (max-width: 768px) {
+    .floatingButton {
+        width: 44px;
+        height: 44px;
+    }
+}
+.floatingButton:hover {
+    transform: scale(1.1);
+    background-color: #1d4ed8;
+}
+
+.iconClose {
+    font-size: 24px;
+}
+
+@media (max-width: 768px) {
+    .iconClose {
+        font-size: 18px;
+    }
+}
+
+.iconChat {
+    font-size: 28px;
+}
+
+@media (max-width: 768px) {
+    .iconChat {
+        font-size: 20px;
+    }
+}
+.optionsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.optionBtn {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 8px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.optionBtn:hover {
+    background-color: #2563eb;
+    color: white;
+}
+
+.headerButtons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.resetButton {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.resetButton:hover {
+    transform: scale(1.1);
+}
+
+.responsesWrapper {
+    width: 100%;
+}
+
+/* Conteneur des options de réponse */
+.responseOptionsContainer {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #dbe3ef;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+/* Carte d'option */
+.optionCard {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background-color: #f8fafc;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    color: #1f2937;
+    cursor: pointer;
+    font: inherit;
+    line-height: 1.35;
+    text-align: left;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.optionCard:hover,
+.optionCard:focus-visible {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+    box-shadow: 0 5px 14px rgba(59, 130, 246, 0.18);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+/* Option la mieux classée */
+.topOption {
+    background-color: #fff7ed;
+    border-color: #f59e0b;
+}
+
+.topOption:hover,
+.topOption:focus-visible {
+    background-color: #ffedd5;
+    border-color: #d97706;
+}
+
+.optionContent {
+    min-width: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.optionHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.optionTitle {
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.optionMeta {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.optionText {
+    color: #334155;
+    display: -webkit-box;
+    font-size: 13px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+}
+
+.optionAction {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Badge de rang */
+.rankBadge {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.16);
+}
+
+/* Rang 1 (doré) */
+.rankBadge1 {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.rankBadge2 {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+
+.rankBadge3 {
+    background: linear-gradient(135deg, #64748b, #94a3b8);
+}

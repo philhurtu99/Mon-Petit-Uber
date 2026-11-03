@@ -1,0 +1,256 @@
+.promotion-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #e6e3e3 0%, #eceeed 100%);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(7, 179, 30, 0.3);
+  animation: pulse 2s infinite;
+  position: relative;
+  z-index: 20;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.promotion-badge__container {
+  position: relative;
+  display: inline-block;
+}
+
+.promotion-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 229, 229, 0.5);
+}
+
+.promotion-badge:active {
+  transform: translateY(0);
+}
+
+.promotion-badge__text {
+  white-space: nowrap;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Variantes de badges */
+.promotion-badge--green {
+  background: linear-gradient(135deg, #51cf66 0%, #69db7c 100%);
+  box-shadow: 0 2px 8px rgba(81, 207, 102, 0.3);
+}
+
+.promotion-badge--blue {
+  background: linear-gradient(135deg, #148cfd 0%, #148cfd 100%);
+  box-shadow: 0 2px 8px rgba(76, 110, 245, 0.3);
+}
+
+.promotion-badge--orange {
+  background: linear-gradient(135deg, #148cfd 0%, #148cfd 100%);
+  box-shadow: 0 2px 8px rgba(63, 113, 207, 0.3);
+}
+
+/* Modal de détails des promotions */
+.promotion-details__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.promotion-details__modal {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 320px;
+  width: 300px;
+  max-height: 300px;
+  overflow-y: 100%;
+  z-index: 100;
+  animation: slideDown 0.3s ease-out;
+  padding: 15px;
+  margin-top: 8px;
+}
+
+.promotion-details__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promotion-details__close:hover {
+  color: #333;
+}
+
+.promotion-details__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.promotion-details__badge {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e6e3e3 0%, #eceeed 100%);
+}
+
+.promotion-details__badge.promotion-badge--green {
+  background: linear-gradient(135deg, #51cf66 0%, #69db7c 100%);
+}
+
+.promotion-details__badge.promotion-badge--orange {
+  background: linear-gradient(135deg, #3c7cc4 0%, #3c7cc4 100%);
+}
+
+.promotion-details__title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.promotion-details__description {
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0 0 12px 0;
+}
+
+.promotion-details__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.promotion-details__section {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+  background: #f9f9f9;
+}
+
+.promotion-details__section h3 {
+  margin: 0 0 6px 0;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.promotion-details__section p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.promotion-details__section strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.promotion-details__dates {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.promotion-details__dates p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.promotion-details__label {
+  color: #999;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-block;
+  min-width: 50px;
+}
+
+.promotion-details__urgency {
+  background: #fff3cd;
+  border-left: 3px solid #d32d3b;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 8px !important;
+  color: #856404 !important;
+}
+
+.promotion-details__urgency--inline {
+  margin-top: 12px !important;
+  padding: 8px 12px;
+}
+
+.promotion-details__section--expired {
+  background: #f8d7da;
+  border-left-color: #dc3545;
+  color: #721c24;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

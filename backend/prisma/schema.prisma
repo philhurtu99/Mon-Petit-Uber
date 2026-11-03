@@ -1,0 +1,355 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+//---------------------------------------------------------------------------------
+model User {
+  id                   String               @id @default(cuid())
+  firstName            String
+  lastName             String
+  email                String               @unique
+  emailVerifiedAt      DateTime?
+  password             String?
+  googleId             String?              @unique
+  address              String?
+  phone                String?
+  profilePicture       String?
+  role                 String               @default("user")
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  verificationTokens   VerificationToken[]
+  passwordResetTokens  PasswordResetToken[]
+  twoFactorCodes       TwoFactorCode[]
+  carts                Cart[]
+  transactions         Transaction[]
+  commandesLivreur     Commande[]           @relation("CommandeLivreur")
+  commandesPreparateur Commande[]           @relation("CommandePreparateur")
+  creditBalance Float @default(0) // crédit disponible
+  loyaltyPoints Int @default(0) // points de fidélité disponibles
+  productReviews       ProductReview[]
+  productReviewFlags   ProductReviewFlag[]
+  employeeReviewsReceived EmployeeReview[] @relation("EmployeeReviews")
+  employeeReviewsGiven    EmployeeReview[] @relation("ReviewerReviews")
+  restrictedWordsCreated RestrictedWord[] @relation("RestrictedWordsCreatedBy")
+  twoFactorEnabled Boolean          @default(false)
+  twoFactorMethod  TwoFactorMethod?
+  profanityFilterEnabled Boolean          @default(true)
+  marketingConsent     Boolean             @default(false) 
+  marketingMethod      MarketingMethod?
+  marketingConsentDate DateTime?
+}
+
+//---------------------------------------------------------------------------------
+enum TwoFactorMethod {
+  EMAIL
+  SMS
+}
+
+enum MarketingMethod  {
+  EMAIL
+  SMS
+}
+
+//---------------------------------------------------------------------------------
+model TwoFactorCode {
+  id        String   @id @default(cuid())
+  code      String // hash bcrypt du code à 6 chiffres
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+//---------------------------------------------------------------------------------
+model VerificationToken {
+  id           String   @id @default(cuid())
+  token        String   @unique
+  userId       String
+  pendingEmail String?
+  user         User     @relation(fields: [userId], references: [id])
+  expiresAt    DateTime
+}
+
+//---------------------------------------------------------------------------------
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+}
+
+//---------------------------------------------------------------------------------
+model Product {
+  id                 Int         @id @default(autoincrement())
+  name               String
+  description        String
+  imageUrl           String?
+  price              Float
+  finalPrice         Float
+  sale               Int?
+  idle               Boolean
+  stock              Int
+  categoryId         Int?
+  category           Category?   @relation(fields: [categoryId], references: [id])
+  cartItems          CartItem[]
+  promotionsAsTarget Promotion[] @relation("targetProduct")
+  promotionsAsBonus  Promotion[] @relation("bonusProduct")
+  items              TransactionItem[]
+  productReviews     ProductReview[]
+  isCooked           Boolean     @default(false)
+}
+
+//---------------------------------------------------------------------------------
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  color    String
+  products Product[]
+}
+
+//---------------------------------------------------------------------------------
+
+model ProductReview {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  comment   String?
+  imagesUrl String[]
+  isFlagged Boolean  @default(false)
+  flagCount Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  flags     ProductReviewFlag[]
+
+  @@unique([userId, productId])
+}
+
+model ProductReviewFlag {
+  id        Int      @id @default(autoincrement())
+  reviewId  Int
+  review    ProductReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([reviewId, userId])
+  @@index([reviewId])
+  @@index([userId])
+}
+
+//---------------------------------------------------------------------------------
+
+model RestrictedWord {
+  id          Int      @id @default(autoincrement())
+  word        String   @unique
+  active      Boolean  @default(true)
+  source      String   @default("admin")
+  detectedByAi Boolean @default(false)
+  lastDetectedByAiAt DateTime?
+  createdById String?
+  createdBy   User?    @relation("RestrictedWordsCreatedBy", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([source])
+  @@index([createdById])
+}
+
+//---------------------------------------------------------------------------------
+
+model EmployeeReview {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  // The livreur being reviewed
+  employeeId String
+  employee   User     @relation("EmployeeReviews", fields: [employeeId], references: [id])
+
+  // The customer who wrote the review
+  reviewerId String
+  reviewer   User     @relation("ReviewerReviews", fields: [reviewerId], references: [id])
+
+  // Must be linked to a commande
+  commandeId Int      @unique  // one review per commande
+  commande   Commande @relation(fields: [commandeId], references: [id])
+}
+
+//---------------------------------------------------------------------------------
+model Promotion {
+  id              Int           @id @default(autoincrement())
+  name            String
+  description     String?
+  type            PromotionType
+  targetProductId Int
+  targetProduct   Product       @relation("targetProduct", fields: [targetProductId], references: [id], onDelete: Cascade)
+  bonusProductId  Int?
+  bonusProduct    Product?      @relation("bonusProduct", fields: [bonusProductId], references: [id], onDelete: Cascade)
+  quantity        Int? // Pour "2 pour 1" = 2, "3 pour 1" = 3
+  bonusQuantity   Int           @default(1) // Quantité bonus gratuite
+  startDate       DateTime      @default(now())
+  endDate         DateTime
+  isActive        Boolean       @default(true)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([targetProductId])
+  @@index([bonusProductId])
+  @@index([endDate])
+  @@index([isActive])
+}
+
+enum PromotionType {
+  BUY_X_GET_Y // 2 pour 1, 3 pour 1, etc.
+  FREE_ITEM // Article gratuit avec achat d'un article préétabli
+}
+
+model Cart {
+  id      Int        @id @default(autoincrement())
+  userId  String?
+  user    User?      @relation(fields: [userId], references: [id])
+  guestId String?    @unique
+  items   CartItem[]
+
+  @@index([userId])
+}
+
+//---------------------------------------------------------------------------------
+model CartItem {
+  id        Int @id @default(autoincrement())
+  cartId    Int
+  productId Int
+
+  quantity Int
+
+  cart    Cart    @relation(fields: [cartId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+  @@index([cartId])
+  @@index([productId])
+}
+
+//---------------------------------------------------------------------------------
+model Transaction {
+  id           Int      @id @default(autoincrement())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  purchaseDate DateTime
+  total        Float
+
+  stripeSessionId String? // ID de la session Stripe
+  stripePaymentId String? // ID du paiement Stripe
+  paidAt          DateTime? // Date et heure du paiement
+
+  items            TransactionItem[]
+  creditUsed       Float             @default(0) // crédit utilisé pour le paiement
+  loyaltyPointsUsed Int              @default(0) // points de fidélité utilisés
+  loyaltyDiscount   Float            @default(0) // rabais obtenu avec les points
+  loyaltyPointsEarned Int            @default(0) // points attribués après complétion
+  stripeAmountPaid Float             @default(0) // montant payé via Stripe
+  commande         Commande?
+}
+
+enum CommandeType {
+  LIVRAISON
+  PICKUP
+}
+
+enum CommandeEtat {
+  EN_PREPARATION
+  READY_FOR_PICKUP
+  READY_FOR_DELIVERY
+  IN_DELIVERY
+  COMPLETEE
+  ANNULEE
+}
+
+model Commande {
+  id                 Int          @id @default(autoincrement())
+  type               CommandeType
+  transactionId      Int          @unique
+  transaction        Transaction  @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  local              String?
+  etat               CommandeEtat @default(EN_PREPARATION)
+  livreurId          String?
+  livreur            User?        @relation("CommandeLivreur", fields: [livreurId], references: [id])
+  preparateurId      String?
+  preparateur        User?        @relation("CommandePreparateur", fields: [preparateurId], references: [id])
+  codeConfirmation   String?
+  readyForPickupAt   DateTime?
+  deliveryPickedUpAt DateTime?
+  deliveredAt        DateTime?
+  expiresAt          DateTime?
+  cancelledAt        DateTime?
+  cancelReason       String?
+  loyaltyPointsAwarded Boolean       @default(false)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  employeeReview     EmployeeReview?
+
+  @@index([type])
+  @@index([etat])
+  @@index([expiresAt])
+  @@index([readyForPickupAt])
+  @@index([livreurId])
+  @@index([preparateurId])
+}
+
+//---------------------------------------------------------------------------------
+model TransactionItem {
+  id            Int @id @default(autoincrement())
+  transactionId Int
+  productId     Int
+
+  quantity Int
+  price    Float // prix au moment de l'achat
+
+  transaction Transaction @relation(fields: [transactionId], references: [id])
+  product     Product     @relation(fields: [productId], references: [id])
+
+  @@unique([transactionId, productId])
+}
+
+//---------------------------------------------------------------------------------
+
+enum CategoryNameFaq {
+  LIVRAISON
+  PAIEMENT
+  MENU
+  PROFIL
+  PRODUITS
+  PROMOTIONS
+  COMMANDES
+  AUTRE
+}
+
+model FaqItem {
+  id        String          @id @default(uuid())
+  question  String
+  answer    String          @db.Text
+  keywords  String[]
+  category  CategoryNameFaq @default(AUTRE)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}

@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 24px 32px;
+    color: black !important;
+}
+
+.pagination * {
+    color: white !important;
+}
+
+/* Tablette */
+@media (max-width: 768px) {
+    .pagination {
+        padding: 16px;
+        gap: 10px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .pagination {
+        flex-direction: column;
+        padding: 12px 8px;
+        gap: 12px;
+    }
+}

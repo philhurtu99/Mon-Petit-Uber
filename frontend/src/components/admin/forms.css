@@ -1,0 +1,570 @@
+/* ──── Modal Overlay ──── */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+    padding: 16px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ──── Modal Content ──── */
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 800px !important;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ──── Modal Header ──── */
+.modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    align-items: center !important;
+    text-align: center;
+}
+
+.modal-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    right: 24px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #6b7280;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: #1a1a2e;
+}
+
+.modal-close-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ──── Modal Body ──── */
+.modal-body {
+    padding: 24px;
+}
+
+.modal-body p {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+}
+
+/* ──── Modal Footer ──── */
+.modal-footer {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 16px 24px;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* ──── Modal Forms ──── */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+}
+
+/* ──── Form Groups ──── */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ──── Form Row (Multiple fields in one row) ──── */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+/* ──── Category Select Wrapper ──── */
+.category-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-select {
+    flex: 1;
+}
+
+.category-color-indicator {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    border: 2px solid #e5e7eb;
+    flex-shrink: 0;
+}
+
+/* ──── Upload Button ──── */
+.btn-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: #f0f4f8;
+    border: 2px dashed #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3b82f6;
+    transition: all 0.2s ease;
+}
+
+.btn-upload:hover {
+    background-color: #e0e9f5;
+    border-color: #3b82f6;
+}
+
+/* ──── Image Preview ──── */
+.image-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px;
+    background-color: #f9fafb;
+    border-radius: 6px;
+    align-items: center;
+}
+
+.btn-remove-image {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-remove-image:hover {
+    background-color: #dc2626;
+}
+
+/* ──── Modal Buttons ──── */
+.modal-form button,
+.modal-footer button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: #88c057;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: white;
+    color: #88c057;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+    background-color: #e5e7eb;
+    color: #1a1a2e;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #d1d5db;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.modal-form button:disabled,
+.modal-footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ──── Modal Error ──── */
+.modal-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    border-left: 3px solid #dc2626;
+    margin-bottom: 12px;
+}
+
+/* ──── Modal Switch Button ──── */
+.modal-switch-btn {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    transition: color 0.2s ease;
+    margin-top: 8px;
+}
+
+.modal-switch-btn:hover {
+    color: #2563eb;
+}
+
+/* ──── Modal Delete (Confirmation) ──── */
+.modal-delete {
+    max-width: 400px;
+}
+
+/* ──── Modal Input Wrapper (for password with eye icon) ──── */
+.modal-input-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-input-wrapper input {
+    padding-right: 40px;
+}
+
+.modal-eye-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+
+.modal-eye-btn:hover {
+    color: #1a1a2e;
+}
+
+/* ──── Responsive Design ──── */
+@media (max-width: 640px) {
+    .modal-content {
+        margin: 16px;
+        max-height: calc(100vh - 32px);
+    }
+
+    .modal-header,
+    .modal-body {
+        padding: 16px;
+    }
+
+    .modal-form {
+        padding: 16px;
+    }
+
+    .modal-footer {
+        flex-direction: column-reverse;
+        padding: 16px;
+    }
+
+    .modal-footer button {
+        width: 100%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ──── Color Picker Wrapper ──── */
+.color-picker-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.color-picker-input {
+    width: 60px;
+    height: 40px;
+    cursor: pointer;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.color-text-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: monospace;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.color-text-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.color-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 2px solid #e5e7eb;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ──── Delete Warning Icon ──── */
+.delete-warning-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: #ef4444;
+}
+
+.delete-message {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.delete-message strong {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+.delete-submessage {
+    font-size: 13px;
+    color: #6b7280;
+    text-align: center;
+    margin: 0;
+}
+
+/* Section rabais avec calculs */
+.discount-calculation {
+    margin-top: 16px;
+    padding: 12px 15px;
+    background-color: #f0f8ff;
+    border-left: 4px solid #8dc640;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discount-calculation p {
+    margin: 0;
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+}
+
+.discount-savings {
+    margin-top: 10px;
+    padding: 12px 15px;
+    background-color: #fff8f0;
+    border-left: 4px solid #ff9500;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discount-savings p {
+    margin: 0;
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ===== CUSTOM TOOLTIP POPUP ===== */
+.help-icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.help-icon-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 11px;
+    color: #333;
+    font-weight: bold;
+    cursor: help;
+    transition: all 0.2s ease;
+}
+
+.help-icon-info:hover {
+    background-color: #88c057;
+    border-color: #88c057;
+    color: white;
+}
+
+.tooltip-popup {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 220px;
+    padding: 10px 14px;
+    background-color: #1a2530;
+    color: white;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.4;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.2s,
+        transform 0.2s,
+        visibility 0.2s;
+    z-index: 100;
+    text-align: center;
+}
+
+/* Petit triangle en bas du popup */
+.tooltip-popup::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1a2530 transparent transparent transparent;
+}
+
+.help-icon-wrapper:hover .tooltip-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}

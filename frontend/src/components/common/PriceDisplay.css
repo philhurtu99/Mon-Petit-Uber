@@ -1,0 +1,34 @@
+.price-display {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.price-display-amounts {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.price-display-final {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #8dc640;
+}
+
+.price-display-original {
+    font-size: 0.85em;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.price-display-badge {
+    align-self: flex-start;
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+}

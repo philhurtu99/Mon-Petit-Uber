@@ -1,0 +1,542 @@
+/* ============================================================
+   CONTENEUR PRINCIPAL
+   ============================================================ */
+.profile__box-wrapper {
+    background: linear-gradient(135deg, #0a1d3f 0%, #1b3355 50%, #0d2847 100%) !important;
+    min-height: 100vh !important;
+    padding: 40px 20px !important;
+    padding-left: 60px !important;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ============================================================
+   CARTE DU PROFIL
+   ============================================================ */
+.profile__box-info {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: clamp(500px, 75%, 800px);
+    margin: 0 auto;
+    border-radius: 15px;
+    padding-bottom: 45px;
+    padding-top: 45px;
+    overflow: hidden;
+}
+
+.profile__box-info .row {
+    align-items: center;
+     margin-left: 0;
+    margin-right: 0;
+}
+
+.profile__box-info .col-md-4 {
+    padding-left: 45px;
+    padding-right: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile__box-info .col-md-8 {
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    
+    .profile__box-wrapper {
+        padding: 20px !important;
+        
+    }
+
+    .profile__box-info {
+        width: 95% !important;
+        min-width: unset !important;
+        margin: 0 auto !important;
+        padding-top: 45px !important;
+        padding-bottom: 45px !important;
+    }
+
+    .profile__box-info .col-md-8 {
+        border-left: none;
+    }
+
+    .profile__little-box {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .profile__text-camera {
+        display: none;
+    }
+}
+
+/* ============================================================
+   AVATAR
+   ============================================================ */
+/* Conteneur de l'avatar pour gérer la superposition */
+.profile__avatar-wrapper {
+    position: relative;
+    width: clamp(150px, 20vw, 170px);
+    height: clamp(150px, 20vw, 170px);
+    border-radius: 50%;
+}
+
+/* Image de l'avatar */
+.profile__avatar {
+    width: clamp(150px, 20vw, 170px);
+    height: clamp(150px, 20vw, 170px);
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #8dc640;
+    transition: all 0.3s ease;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: default;
+}
+
+/* Overlay sombre pour l'édition */
+.profile__avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(150px, 20vw, 170px);
+    height: clamp(150px, 20vw, 170px);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #fdfbf7;
+    font-size: 13px;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* Icône caméra */
+.profile__avatar-camera {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 40px;
+    height: 40px;
+    background-color: #3e516d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #3e516d;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+/* ============================================================
+   TITRES ET SOUS-TITRES
+   ============================================================ */
+.profile__section-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 4px;
+    padding-top: 20px;
+}
+
+.profile__section-subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.profile__text-camera {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.profile__error-message {
+    color: #f5b872;
+    font-size: 13px;
+    margin-top: 8px;
+    font-style: italic;
+    text-align: right;
+    display: block;
+}
+
+/* ============================================================
+   CHAMPS DU FORMULAIRE
+   ============================================================ */
+.profile__field {
+    margin-bottom: 14px;
+}
+
+.profile__field p {
+    margin-left: 10px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.514);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.profile__field-icon {
+    font-size: 18px !important;
+    color: rgba(255, 255, 255, 0.514);
+}
+
+/* Champ en mode lecture */
+.profile__little-box {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    width: 100%;
+    height: 45px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    color: #3e516d;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Champ en mode édition */
+.profile__field .form-control {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    width: 100%;
+    height: 45px;
+    padding-left: 18px;
+    color: #3e516d;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile__field .form-control:focus {
+    outline: none;
+    box-shadow: 0 4px 16px #8dc640;
+    background-color: #ffffff;
+}
+
+.profile__field .form-control:hover {
+    transform: scale(1.02);
+}
+
+.profile__field .form-control::placeholder {
+    color: #a0aec0;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.profile__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 45px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 50px;
+    background: #ffffff;
+    color: #3e516d;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.profile__toggle:hover:not(:disabled) {
+    transform: scale(1.02);
+}
+
+.profile__toggle:disabled {
+    cursor: wait;
+    opacity: 0.75;
+}
+
+.profile__toggle-track {
+    position: relative;
+    width: 46px;
+    height: 26px;
+    border-radius: 999px;
+    background: #cbd5e1;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+}
+
+.profile__toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease;
+}
+
+.profile__toggle.is-on .profile__toggle-track {
+    background: #8dc640;
+}
+
+.profile__toggle.is-on .profile__toggle-thumb {
+    transform: translateX(20px);
+}
+
+/* ============================================================
+   BOUTONS D'ACTION
+   ============================================================ */
+.profile__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 25px;
+}
+
+/* Bouton Enregistrer */
+.profile__btn-save {
+    background-color: #8dc640;
+    color: #fdfbf7;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.profile__btn-save:hover {
+    transform: scale(1.08);
+}
+
+/* Bouton Annuler */
+.profile__btn-cancel {
+    background-color: #f5b872;
+    color: #fdfbf7;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.profile__btn-cancel:hover {
+    transform: scale(1.08);
+}
+
+/* lien editer */
+.profile__section-subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.profile__edit-link {
+    font-size: 12px;
+    font-weight: 400;
+    color: #8dc640;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding-left: 10px;
+}
+
+.profile__edit-link:hover {
+    color: white;
+}
+
+/* ============================================================
+   POPUP NOTIFICATION
+   ============================================================ */
+.profile__popup {
+    position: fixed;
+    top: 80px;        
+    right: 20px;      
+    padding: 14px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    z-index: 9999;
+    max-width: 300px;
+    color: white;
+    animation: popupFadeIn 0.3s ease;
+}
+
+.profile__popup--success {
+    background-color: #88C057;  
+}
+
+.profile__popup--info {
+    background-color: #3e516d;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@keyframes popupFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.profile__loyalty-scene {
+    perspective: 900px;
+    margin: 18px 0 8px;
+}
+
+.profile__loyalty-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 145px;
+    border-radius: 18px;
+    padding: 20px;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.35), transparent 26%),
+        linear-gradient(135deg, #17365f 0%, #8dc640 48%, #f5b872 100%);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+        0 22px 45px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+    transform-style: preserve-3d;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.profile__loyalty-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            118deg,
+            transparent 0,
+            transparent 18px,
+            rgba(255, 255, 255, 0.12) 19px,
+            rgba(255, 255, 255, 0.12) 20px,
+            transparent 22px,
+            transparent 42px
+        ),
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.18) 48%,
+            transparent 72%
+        );
+    opacity: 0.55;
+    transform: translateZ(18px);
+    pointer-events: none;
+}
+
+.profile__loyalty-card::after {
+    content: "";
+    position: absolute;
+    top: -45%;
+    left: -35%;
+    width: 38%;
+    height: 190%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+    transform: rotate(24deg) translateX(-140%);
+    transition: transform 0.55s ease;
+    pointer-events: none;
+}
+
+.profile__loyalty-card:hover {
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.profile__loyalty-card:hover::after {
+    transform: rotate(24deg) translateX(360%);
+}
+
+.profile__loyalty-shine {
+    position: absolute;
+    inset: -60% -20% auto auto;
+    width: 220px;
+    height: 220px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(35deg);
+    filter: blur(8px);
+    animation: loyaltyPulse 3.2s ease-in-out infinite;
+}
+
+.profile__loyalty-top,
+.profile__loyalty-bottom {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+}
+
+.profile__loyalty-top {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+
+.profile__loyalty-icon {
+    color: #ffffff;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.25));
+}
+
+.profile__loyalty-card strong {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin: 22px 0 18px;
+    font-size: 34px;
+    line-height: 1;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    transform: translateZ(28px);
+}
+
+.profile__loyalty-bottom {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
+    transform: translateZ(22px);
+}
+
+@keyframes loyaltyPulse {
+    0%, 100% {
+        opacity: 0.35;
+        transform: rotate(35deg) translateX(0);
+    }
+    50% {
+        opacity: 0.55;
+        transform: rotate(35deg) translateX(-18px);
+    }
+}

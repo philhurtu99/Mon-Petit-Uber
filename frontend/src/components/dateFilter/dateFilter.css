@@ -1,0 +1,27 @@
+.dateFilter_wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+}
+
+.dateFilter_option {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: transparent;
+    color: #333;
+    font-weight: 400;
+    cursor: pointer;
+    margin-bottom: 2px;
+    transition: background 0.2s;
+}
+
+.dateFilter_option.selected {
+    background: #f2f7e9;
+    color: #8dc640;
+    font-weight: 700;
+}
+
+.dateFilter_option:hover {
+    background: #e8f5d6;
+    color: #7ab32d;
+}

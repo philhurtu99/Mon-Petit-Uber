@@ -1,0 +1,234 @@
+:root {
+    --bg-card: #151e3f;
+    --accent: #8dc640;
+    --text-main: #f2f3d9;
+}
+
+/* ── Card container ─────────────────────────────────────────────────────── */
+.inventory-card {
+    background: var(--bg-card) !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.inventory-card .MuiTypography-root {
+    color: #ffffff;
+}
+
+.inventory-card .MuiIconButton-root {
+    color: rgba(242, 243, 217, 0.7);
+}
+
+.inventory-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    border-color: rgba(141, 198, 64, 0.5);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+    ) !important;
+}
+
+/* ── Image wrapper — zone du haut avec son propre fond ──────────────────── */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #243855;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.inventory-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+    transition: transform 0.4s ease;
+    box-sizing: border-box;
+}
+
+.inventory-card:hover .inventory-image {
+    transform: scale(1.07);
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.image-wrapper:hover .image-overlay {
+    opacity: 1;
+}
+
+.overlay-label {
+    background: var(--accent);
+    color: #030027;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Promo overlay ───────────────────────────────────────────────────────── */
+.inventory-card--promo {
+    border: 1px solid rgba(119, 194, 255, 0.966);
+}
+
+.promo-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+    flex-wrap: wrap;
+    max-width: calc(100% - 20px);
+    pointer-events: auto;
+}
+
+.promotion-badge__type {
+    font-size: 0.7rem;
+    opacity: 0.9;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── Body — fond glassmorphism sur la zone inférieure seulement ─────────── */
+.inventory-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 12px;
+    gap: 4px;
+    min-height: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.02) 100%
+    );
+    backdrop-filter: blur(10px);
+}
+
+/* Row nom + prix ────────────────────────────────────────────────────── */
+.card-name-price-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 0;
+}
+
+/* Nom : 2 lignes max, prend l'espace restant */
+.inventory-body .MuiCardHeader-root {
+    padding: 0 !important;
+    flex: 1;
+    min-width: 0;
+}
+
+.inventory-body .MuiCardHeader-title {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--text-main) !important;
+    line-height: 1.35em !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Prix — affiché à droite du nom dans une row */
+.inventory-body .MuiTypography-h6 {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: var(--accent) !important;
+    text-align: right !important;
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Actions ────────────────────────────────────────────────────────────── */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-card) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0 !important;
+    padding: 6px 8px;
+    transition: background-color 0.3s ease;
+    /* fait partie de la zone basse — pas de backdrop-filter séparé */
+}
+
+.inventory-card:hover .card-actions {
+    background-color: rgba(66, 106, 90, 0.65);
+}
+
+.card-actions .MuiIconButton-root {
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+    padding: 6px !important;
+}
+
+.card-actions .MuiIconButton-root:hover {
+    background-color: rgba(118, 202, 8, 0.2) !important;
+    transform: scale(1.15);
+    color: #76ca08 !important;
+}
+
+.ribbon {
+  position: absolute;
+  top: 30px;
+  left: -40px;
+  background: orange;
+  padding: 5px 40px;
+  transform: rotate(-45deg);
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .inventory-body {
+        padding: 10px;
+    }
+
+    .inventory-body .MuiCardHeader-title {
+        font-size: 0.8rem !important;
+    }
+
+    .inventory-body .MuiTypography-h6 {
+        font-size: 0.85rem !important;
+    }
+
+    .card-actions .MuiIconButton-root {
+        padding: 5px !important;
+    }
+}

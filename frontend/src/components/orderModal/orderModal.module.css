@@ -1,0 +1,657 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap");
+
+/* ===== OVERLAY ===== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(26, 37, 48, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* ===== CONTENEUR MODAL ===== */
+.modal-content {
+    background-color: #243855;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 380px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUpScale 0.3s ease-out forwards;
+    position: relative;
+}
+
+/* ===== SCROLLBAR ===== */
+.modal-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: rgba(136, 192, 87, 0.4);
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(136, 192, 87, 0.7);
+}
+
+/* ===== BOUTON FERMER (X) ===== */
+.modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: white;
+    cursor: pointer;
+    transition:
+        color 0.2s,
+        transform 0.2s;
+    padding: 0;
+    z-index: 10;
+}
+
+.modal-close-btn:hover {
+    color: #88c057;
+    transform: scale(1.1);
+}
+
+/* ===== CORPS DU MODAL ===== */
+.modal-body {
+    padding: 28px 24px 24px;
+}
+
+/* ===== TITRE ===== */
+.modal-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+/* ===== AUCUNE COMMANDE ===== */
+.modal-no-commande {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    color: #9ca3af;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* ===== BADGE ÉTAT ===== */
+.modal-etat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.modal-etat-badge {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.modal-preparation-timer {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    padding: 4px 8px;
+    color: #f8c46a;
+    border-radius: 999px;
+    background: rgba(245, 166, 35, 0.1);
+}
+
+/* ===== CARTE LIVREUR ===== */
+.modal-livreur {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+}
+
+.modal-livreur-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #88c057;
+}
+
+.modal-livreur-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.modal-livreur-name {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.modal-livreur-role {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+/* ===== LIGNES INFO (commande #, type, heure) ===== */
+.modal-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-info-label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+.modal-info-value {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+/* ===== TITRE SECTION ARTICLES ===== */
+.modal-section-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin: 20px 0 12px 0;
+}
+
+/* ===== ARTICLES ===== */
+.modal-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-item-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+.modal-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.modal-item-name {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+.modal-item-qty {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.modal-item-price {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #88c057;
+    flex-shrink: 0;
+}
+
+/* ===== ACCORDÉON ARTICLES ===== */
+.modal-accordion-btn {
+    width: 100%;
+    background: none;
+    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: #9ca3af;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    padding: 8px;
+    margin: 6px 0;
+    cursor: pointer;
+    transition:
+        color 0.2s,
+        border-color 0.2s;
+}
+
+.modal-accordion-btn:hover {
+    color: #88c057;
+    border-color: rgba(136, 192, 87, 0.4);
+}
+
+/* ===== TOTAL ===== */
+.modal-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0 4px 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+}
+
+/* ===== CODE CONFIRMATION ===== */
+.modal-code-section {
+    margin-top: 24px;
+    background: rgba(136, 192, 87, 0.1);
+    border: 1px solid rgba(136, 192, 87, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-code-label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    color: #88c057;
+    margin: 0 0 12px 0;
+}
+
+.modal-code {
+    font-family: "Poppins", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 12px;
+    padding-left: 12px;
+}
+
+/* ===== BOUTON FERMER (bas) ===== */
+.modal-cancel-btn {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px 16px;
+    background-color: #ff4d4d;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.28);
+    transition:
+        transform 0.2s,
+        background-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.modal-cancel-btn:hover:not(:disabled) {
+    background-color: #ff6666;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 77, 77, 0.36);
+}
+
+.modal-cancel-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.modal-cancel-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.modal-confirm-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(26, 37, 48, 0.72);
+    backdrop-filter: blur(3px);
+    border-radius: 24px;
+}
+
+.modal-confirm-box {
+    width: 100%;
+    padding: 22px;
+    background: #243855;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+}
+
+.modal-confirm-text {
+    margin: 0 0 18px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.modal-confirm-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.modal-confirm-yes,
+.modal-confirm-no {
+    min-height: 44px;
+    border: none;
+    border-radius: 30px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform 0.2s,
+        background-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.modal-confirm-yes {
+    color: white;
+    background: #ff4d4d;
+    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.28);
+}
+
+.modal-confirm-yes:hover:not(:disabled) {
+    background: #ff6666;
+    transform: translateY(-1px);
+}
+
+.modal-confirm-no {
+    color: #1a2530;
+    background: #88c057;
+    box-shadow: 0 4px 12px rgba(136, 192, 87, 0.24);
+}
+
+.modal-confirm-no:hover:not(:disabled) {
+    background: #98cf68;
+    transform: translateY(-1px);
+}
+
+.modal-confirm-yes:disabled,
+.modal-confirm-no:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.modal-cta-btn {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    padding: 16px;
+    background-color: #88c057;
+    color: #1a2530;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(136, 192, 87, 0.3);
+    transition:
+        transform 0.2s,
+        background-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.modal-cta-btn:hover {
+    background-color: #98cf68;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(136, 192, 87, 0.4);
+}
+
+.modal-cta-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== STALLED ORDER WARNING ===== */
+.stalled-warning {
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(245, 166, 35, 0.1);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    border-radius: 16px;
+    text-align: center;
+}
+
+.stalled-text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    color: #f5a623;
+    margin: 0 0 14px 0;
+    line-height: 1.4;
+}
+
+.stalled-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.takeout-btn {
+    background-color: #88c057;
+    color: #1a2530;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform 0.2s,
+        background-color 0.2s;
+}
+
+.takeout-btn:hover {
+    background-color: #98cf68;
+    transform: translateY(-1px);
+}
+
+.cancel-stalled-btn {
+    background-color: transparent;
+    color: #ff4d4d;
+    border: 1.5px solid #ff4d4d;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+.cancel-stalled-btn:hover:not(:disabled) {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.cancel-stalled-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #9ca3af;
+    color: #9ca3af;
+}
+
+.cooked-info {
+    font-family: "Open Sans", sans-serif;
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 600px) {
+    .modal-content {
+        max-width: 100%;
+        border-radius: 16px;
+        margin: 12px;
+    }
+
+    .modal-body {
+        padding: 28px 22px 24px;
+    }
+
+    .modal-title {
+        font-size: 22px;
+    }
+
+    .modal-code {
+        font-size: 40px;
+        letter-spacing: 8px;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpScale {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-popup {
+    position: fixed;
+    top: 78px;
+    right: 20px;
+    z-index: 1200;
+    width: min(380px, calc(100vw - 32px));
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    color: #172033;
+    background: #fffdf8;
+    border: 1px solid rgba(141, 198, 64, 0.55);
+    border-radius: 8px;
+    box-shadow:
+        0 18px 45px rgba(10, 29, 63, 0.22),
+        0 2px 10px rgba(10, 29, 63, 0.12);
+}
+
+.modal-popup::before {
+    display: none;
+}
+
+.modal-no-commande {
+    margin: 0;
+    padding: 22px 12px 18px;
+    color: #526070;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.modal-popup-btn {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 14px;
+    color: #0b1a2f;
+    background: #8dc640;
+    border: 1px solid #7bb531;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.modal-popup-btn:hover {
+    background: #9bd452;
+    box-shadow: 0 8px 18px rgba(141, 198, 64, 0.28);
+    transform: translateY(-1px);
+}
+
+.modal-popup-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 860px) {
+    .modal-popup {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 16px;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        border-radius: 16px 16px 0 0;
+        animation: cart-popup-slide-up 0.22s ease-out;
+    }
+
+    .modal-popup::before {
+        display: none;
+    }
+}
+
+@keyframes cart-popup-slide-up {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
